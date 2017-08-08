@@ -2,9 +2,11 @@
 # -*- coding:utf-8 -*-
 
 """OIB check"""
+
 import sys
 from PyQt5 import QtWidgets
 from gui_design import Ui_Form
+
 
 class oib(QtWidgets.QWidget, Ui_Form):
     def __init__(self, parent=None):
@@ -12,14 +14,18 @@ class oib(QtWidgets.QWidget, Ui_Form):
 
         self.setupUi(self)
 
+        self.pushButton.clicked.connect(self.print_result)
 
 
-    def check_oib(self, oib=""):
-        if len(oib) != 11:
-            return False
 
-        if not oib.isdigit():
-            return False
+    def check_oib(self, oib):
+        #if len(self.oib_broj) != 11:
+        #    return False
+
+        #if not self.oib_broj.isdigit():
+        #    return False
+        print("oib varijabla: {}".format(oib))
+        print(type(oib))
 
         a = 10
         for i in range(0, 10):
@@ -34,6 +40,15 @@ class oib(QtWidgets.QWidget, Ui_Form):
         if kontrolni == 10:
             kontrolni = 0
         return kontrolni == int(oib[10:11])
+
+    def print_result(self):
+        # Read from lineEdit
+        self.oib_broj = self.lineEdit.text()
+        # Check if OIB is ok and print the message
+        if self.check_oib(self.oib_broj):
+            self.label_3.setText("Ispravan!")
+        else:
+            self.label_3.setText("Neispravan!")
 
 
 if __name__ == "__main__":

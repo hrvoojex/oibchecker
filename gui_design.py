@@ -28,6 +28,10 @@ class Ui_Form(object):
         self.groupBox.setGeometry(QtCore.QRect(80, 70, 161, 31))
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
+        self.label_3 = QtWidgets.QLabel(self.groupBox)
+        self.label_3.setGeometry(QtCore.QRect(10, 5, 121, 21))
+        self.label_3.setText("")
+        self.label_3.setObjectName("label_3")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
