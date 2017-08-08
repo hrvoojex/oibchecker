@@ -4,7 +4,7 @@
 """OIB check"""
 
 import sys
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from gui_design import Ui_Form
 
 
@@ -13,19 +13,14 @@ class oib(QtWidgets.QWidget, Ui_Form):
         super().__init__(parent)
 
         self.setupUi(self)
-
         self.pushButton.clicked.connect(self.print_result)
 
-
-
     def check_oib(self, oib):
-        #if len(self.oib_broj) != 11:
-        #    return False
+        if len(self.oib_broj) != 11:
+            return False
 
-        #if not self.oib_broj.isdigit():
-        #    return False
-        print("oib varijabla: {}".format(oib))
-        print(type(oib))
+        if not self.oib_broj.isdigit():
+            return False
 
         a = 10
         for i in range(0, 10):
@@ -50,13 +45,19 @@ class oib(QtWidgets.QWidget, Ui_Form):
         else:
             self.label_3.setText("Neispravan!")
 
+    def keyPressEvent(self, e):
+        """Action when return or escape is pressed"""
+        if e.key() == QtCore.Qt.Key_Return:
+            self.print_result()
+        # self.close is MaApp close() which is QWidget's close()
+        if e.key() == QtCore.Qt.Key_Escape:
+            self.close()
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-
     w = oib()
     w.move(400, 400)
     w.setWindowTitle("Provjera ispravnosti OIB-a")
     w.show()
-
     sys.exit(app.exec_())
